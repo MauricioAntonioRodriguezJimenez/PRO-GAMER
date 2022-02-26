@@ -1,17 +1,27 @@
 package proyecto.programacion;
-
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.Date;
-
-
 public class Empleado {
     
     private String nombre;
     private String apellido;
     private int ID;
     private char sexo;
-    private Date fechaNacimiento;
+    private int fechaNacimiento;
+    
+    public Empleado(){
+        nombre = " ";
+        apellido = " ";
+        ID = 0;
+        sexo = ' ';
+        fechaNacimiento=0;
+    }
+    
+    public Empleado(String nombreEmp,String apellidoEmp,int IDEmp, char sex,int fecha){
+        nombre = nombreEmp;
+        apellido = apellidoEmp;
+        ID = IDEmp;
+        sexo = sex;
+        fechaNacimiento = fecha;
+    }
 
     
     //Metodos de Modificar el Nombre del Empleado
@@ -40,7 +50,7 @@ public class Empleado {
     public int getID(){
         return this.ID;
     }
-    
+        
     // Metodos para modificar el Sexo del Empleado
     public void setSexo(char _sexo){
         this.sexo = _sexo;
@@ -59,8 +69,9 @@ public class Empleado {
     }
 
     
+    
     //Metodo para Modificar la Fecha de Nacimiento del Empleado
-    public void setFechaNacimiento(Date _fechaNacimiento){
+    public void setFechaNacimiento(int _fechaNacimiento){
         this.fechaNacimiento = _fechaNacimiento;
     }
     
@@ -68,17 +79,11 @@ public class Empleado {
     
     // Metodo para Calcular la Edad del Empleado
     public int getEdad(){
-        
-        LocalDate _fechaNacimiento = LocalDate.of(this.fechaNacimiento.getYear(), this.fechaNacimiento.getMonth(), this.fechaNacimiento.getDay());
-        LocalDate Hoy = LocalDate.now();
-        Period periodo = Period.between(_fechaNacimiento, Hoy);
-        
-        return periodo.getYears();
+        int edad;
+        edad = 2022 -fechaNacimiento;
+        return edad;
+ 
     }
     
-
-    
-    
-
     
 }
