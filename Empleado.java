@@ -1,4 +1,7 @@
 package proyecto.programacion;
+
+
+
 public class Empleado {
     
     private String nombre;
@@ -6,21 +9,15 @@ public class Empleado {
     private int ID;
     private char sexo;
     private int fechaNacimiento;
+
+    //Metodo Constructor 
     
-    public Empleado(){
-        nombre = " ";
-        apellido = " ";
-        ID = 0;
-        sexo = ' ';
-        fechaNacimiento=0;
-    }
-    
-    public Empleado(String nombreEmp,String apellidoEmp,int IDEmp, char sex,int fecha){
-        nombre = nombreEmp;
-        apellido = apellidoEmp;
-        ID = IDEmp;
-        sexo = sex;
-        fechaNacimiento = fecha;
+    public Empleado(String _nombre,String _apellido,int _ID, char _sexo,int _fechaNacimiento){
+        this.nombre = _nombre;
+        this.apellido = _apellido;
+        this.ID = _ID;
+        this.sexo = _sexo;
+        this.fechaNacimiento = _fechaNacimiento;
     }
 
     
@@ -80,9 +77,8 @@ public class Empleado {
     // Metodo para Calcular la Edad del Empleado
     public int getEdad(){
         int edad;
-        edad = 2022 -fechaNacimiento;
+        edad = 2022 - fechaNacimiento;
         return edad;
- 
     }
     
     
