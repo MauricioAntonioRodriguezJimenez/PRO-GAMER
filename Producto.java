@@ -10,14 +10,6 @@ public class Producto implements Comparadores {
     private int codigo;
 
     //Metodo Constructor
-    public Producto() {
-        nombre = " ";
-        marca = " ";
-        modelo = " ";
-        precio = 0;
-        cantidad = 0;
-        codigo = 0;
-    }
 
     public Producto(String _nombre, String _modelo, String _marca, double _precio, int _cantidad, int _codigo) {
         nombre = _nombre;
@@ -113,39 +105,39 @@ public class Producto implements Comparadores {
     }
 
     //--------------------------------------------------------------
-    //Método comparador
     public double toDouble() {
         return this.precio;
     }
 
+    //Metodos abstractos
     @Override
     public boolean igualQue(Object o) {
-        Producto precio = (Producto) o;
-        return this.toDouble() == precio.toDouble();
+        Producto n = (Producto) o;
+        return this.toDouble() == n.toDouble();
     }
 
     @Override
     public boolean menorQue(Object o) {
-        Producto precio = (Producto) o;
-        return this.toDouble() < precio.toDouble();
+        Producto n = (Producto) o;
+        return this.toDouble() < n.toDouble();
     }
 
     @Override
     public boolean mayorQue(Object o) {
-        Producto precio = (Producto) o;
-        return this.toDouble() > precio.toDouble();
+        Producto n = (Producto) o;
+        return this.toDouble() > n.toDouble();
     }
 
     @Override
     public boolean menorIgual(Object o) {
-        Producto precio = (Producto) o;
-        return this.toDouble() <= precio.toDouble();
+        Producto n = (Producto) o;
+        return this.toDouble() <= n.toDouble();
     }
 
     @Override
     public boolean mayorIgual(Object o) {
-        Producto precio = (Producto) o;
-        return this.toDouble() >= precio.toDouble();
+        Producto n = (Producto) o;
+        return this.toDouble() >= n.toDouble();
     }
 
 }
