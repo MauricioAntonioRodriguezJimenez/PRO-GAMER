@@ -1,6 +1,8 @@
 package proyecto.programacion;
 
-public class Producto implements Comparadores {
+import java.util.List;
+
+public abstract class Producto  implements CRUD{
 
     private String nombre;
     private String marca;
@@ -9,6 +11,7 @@ public class Producto implements Comparadores {
     private int cantidad;
     private int codigo;
 
+    
     //Metodo Constructor
 
     public Producto(String _nombre, String _modelo, String _marca, double _precio, int _cantidad, int _codigo) {
@@ -19,7 +22,21 @@ public class Producto implements Comparadores {
         cantidad = _cantidad;
         codigo = _codigo;
     }
+    
+    //Metodo Constructor
+    
+    public Producto(String nombre, String marca, String modelo, double precio, int cantidad) {
+        this.nombre = nombre;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.precio = precio;
+        this.cantidad = cantidad;
+    }
 
+    //Metodo Constructor
+    public Producto() {
+    }
+    
     //Metodo para Modificar el Nombre del Producto
     public void setNombre(String _nombre) {
         this.nombre = _nombre;
@@ -104,41 +121,27 @@ public class Producto implements Comparadores {
 
     }
 
-    //--------------------------------------------------------------
-    public double toDouble() {
-        return this.precio;
-    }
-
-    //Metodos abstractos
     @Override
-    public boolean igualQue(Object o) {
-        Producto n = (Producto) o;
-        return this.toDouble() == n.toDouble();
+    public int Create(Object g) {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
-    public boolean menorQue(Object o) {
-        Producto n = (Producto) o;
-        return this.toDouble() < n.toDouble();
+    public int Delete(int key) {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
-    public boolean mayorQue(Object o) {
-        Producto n = (Producto) o;
-        return this.toDouble() > n.toDouble();
+    public List Buscar(double  key) {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
-    public boolean menorIgual(Object o) {
-        Producto n = (Producto) o;
-        return this.toDouble() <= n.toDouble();
+    public List readAll() {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
-    @Override
-    public boolean mayorIgual(Object o) {
-        Producto n = (Producto) o;
-        return this.toDouble() >= n.toDouble();
-    }
+   
 
+  
 }
-
