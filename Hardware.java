@@ -13,63 +13,6 @@ public class Hardware extends Producto {
     private PreparedStatement ps;
     private Connection cx;
 
-    private String nombre;
-    private String marca;
-    private String modelo;
-    private double precio;
-    private int cantidad;
-    private int codigo;
-
-    private double total;
-    private double descuento;
-    
-       public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
     
 
     public Hardware(String nombre, String marca, String modelo, double precio, int cantidad, int codigo) {
@@ -84,43 +27,9 @@ public class Hardware extends Producto {
     public Hardware() {
     }
 
-
-    public void cobrar() {
-        double _precio = this.getPrecio();
-        int _cantidad = this.getCantidad();
-
-        total = (_cantidad * _precio);
-
-    }
-
-    public double Descuento(double total) {
-
-        double descuento = 0;
-
-        if (total >= 100) {
-            descuento = 0.05 * total;
-            total = total - descuento;
-
-        } else if (total >= 101 && total < 700) {
-            descuento = 0.10 * total;
-            total = total - descuento;
-
-        } else if (total >= 700 && total < 1500) {
-            descuento = 0.15 * total;
-            total = total - descuento;
-
-        } else if (total >= 1500) {
-            descuento = 0.20 * total;
-            total = total - descuento;
-        }
-
-        return total;
-
-    }
     
     
-    //Método para agregar productos hardware
-    @Override
+        @Override
     public int Create(Object g) {
        int crear=0;
        String SQL_CREATE = "INSERT INTO productohardware (nombre, marca, modelo,precio, cantidad,codigo) VALUES (?,?,?,?,?,?)";
@@ -138,14 +47,13 @@ public class Hardware extends Producto {
             System.out.println("Producto de Hardware Registrado con Exito!");
             
         }catch(Exception e){
-            System.out.println("Error: " +e);
+            System.out.println("Error: No se logro registrar el producto...");
         }
         
         return crear;
     }
     
     
-    //Método para mostrar la tabla de productos hardware
     @Override
     public List readAll() {
     
@@ -172,16 +80,15 @@ public class Hardware extends Producto {
                 listaRA.add(HardwareRA);
             } 
         }catch  (SQLException e){
-            System.out.println("Error: " +e);
+            System.out.println("Error: No se puede mostrar la tabla en pantalla");
         }
      return listaRA;  
     }   
     
-    //Método de búsqueda por precio
     @Override
     public List<Hardware> Buscar(double key) {
         
-    String SQL_READ = "SELECT * FROM productohardware WHERE precio = ?";
+    String SQL_READ = "SELECT marca, modelo, precio FROM productohardware WHERE precio = ?";
         
        Hardware hardRead = new Hardware();
        System.out.println("Busqueda de Producto de Hardware!");
@@ -192,22 +99,18 @@ public class Hardware extends Producto {
            ps.setDouble(1, key);
            rs = ps.executeQuery();
            while(rs.next()){
-                hardRead.setNombre(rs.getString(1));
-                hardRead.setMarca(rs.getString(2));
-                hardRead.setModelo(rs.getString(3));
-                hardRead.setPrecio(rs.getDouble(4));
-                hardRead.setCantidad(rs.getInt(5));
-                hardRead.setCodigo(rs.getInt(6));
+               hardRead.setMarca(rs.getString(1));
+               hardRead.setModelo(rs.getString(2));
+               hardRead.setPrecio(rs.getDouble(3));
                listaR.add(hardRead);
            }
            }catch(Exception e){
-                   System.out.println("Error: " +e);
+                   System.out.println("Error: No se pudo encontrar el producto a buscar");
            }
            return listaR;
        }
     
-    //Método para eliminar por código
-    @Override
+      @Override
     public int Delete(int key) {
          int delete=0;
          String SQL_DELETE = "DELETE FROM productohardware WHERE codigo = ?";
@@ -218,10 +121,11 @@ public class Hardware extends Producto {
            delete=ps.executeUpdate();
            System.out.println("Producto de Hardware Eliminado con Exito!");
         } catch (Exception e){
-            System.out.println("Error: "+e);
+            System.out.println("Error: No se pudo eliminar el producto de la tabal...");
         }
         return delete;
     }
 
 
 
+}
