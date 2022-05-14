@@ -94,7 +94,6 @@ public class Empleado implements CRUD {
         return edad;
     }
 
-    //Método para agregar empleados
     @Override
     public int Create(Object g) {
         int crear = 0;
@@ -111,13 +110,12 @@ public class Empleado implements CRUD {
             System.out.println("Empleado Registrado con exito!");
 
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println("Error: No se pudo agregar el Empleado a la Base de Datos");
         }
 
         return crear;
     }
 
-    //Muestra la lista de empleados
     @Override
     public List readAll() {
         List<Empleado> listaRA =new ArrayList<>();
@@ -142,13 +140,12 @@ public class Empleado implements CRUD {
                 listaRA.add(empleadosRA);
             } 
         }catch  (SQLException e){
-            System.out.println("Error: " +e);
+            System.out.println("Error: No se puede mostrar la tabla con los Empleados");
         }
      return listaRA;  
 
     }
 
-    //Método de busqueda por  ID
     @Override
     public List Buscar(double key) {
         
@@ -174,14 +171,13 @@ public class Empleado implements CRUD {
             }
             
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println("Error: No se pudo encontrar al Empleado");
         }
         return listaR;
     }
 
 
     
-    //Método para la eliminacion de empleados por ID
     @Override
     public int Delete(int key) {
         int delete = 0;
@@ -193,7 +189,7 @@ public class Empleado implements CRUD {
             delete = ps.executeUpdate();
             System.out.println("ID de empleado Eliminado con Exito!");
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println("Error: No se pudo eliminar a el Empleado");
         }
         return delete;
     }
