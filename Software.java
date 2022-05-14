@@ -13,62 +13,7 @@ public class Software extends Producto{
     private PreparedStatement ps;
     private Connection cx;
 
-    private String nombre;
-    private String marca;
-    private String modelo;
-    private double precio;
-    private int cantidad;
-    private int codigo;
-
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
+    
     public Software(String nombre, String marca, String modelo, double precio, int cantidad, int codigo) {
         this.nombre = nombre;
         this.marca = marca;
@@ -82,44 +27,7 @@ public class Software extends Producto{
     public Software() {
     }
 
-    private double total;
 
-    private double descuento;
-
-    public void cobrar() {
-        double _precio = this.getPrecio();
-        int _cantidad = this.getCantidad();
-
-        total = (_cantidad * _precio);
-    }
-
-    public double Descuento(double total) {
-
-        double descuento = 0;
-
-        if (total >= 50) {
-            descuento = 0.05 * total;
-            total = total - descuento;
-
-        } else if (total >= 51 && total < 200) {
-            descuento = 0.10 * total;
-            total = total - descuento;
-
-        } else if (total >= 200 && total < 800) {
-            descuento = 0.15 * total;
-            total = total - descuento;
-
-        } else if (total >= 800) {
-            descuento = 0.20 * total;
-            total = total - descuento;
-        }
-
-        return total;
-
-    }
-    
-
-    //Método para agregar productos de software
     @Override
     public int Create(Object g) {
        int crear=0;
@@ -138,13 +46,13 @@ public class Software extends Producto{
             System.out.println("Producto de Software Registrado con Exito!");
             
         }catch(Exception e){
-            System.out.println("Error: " +e);
+            System.out.println("Error: No se a podido registrar el producto...");
         }
         
         return crear;
     }
     
-    //Método de mostrar la tabla de los productos de software
+    
     @Override
     public List readAll() {
     
@@ -171,14 +79,15 @@ public class Software extends Producto{
                 lista.add(softwareC);
             } 
         }catch  (SQLException e){
-            System.out.println("Error: " +e);
+            System.out.println("Error: No se puede mostrar la tabla en pantalla");
         }
      return lista;  
     }   
-    //Método de busqueda por precios
+    
     @Override
     public List<Software> Buscar(double key) {
-    String SQL_READ = "SELECT * FROM productosoftware WHERE precio = ?";
+   
+        String SQL_READ = "SELECT nombre, marca, modelo FROM productosoftware WHERE precio = ?";
         
        Software softRead = new Software();
        System.out.println("Busqueda de Producto de Software: ");
@@ -189,21 +98,19 @@ public class Software extends Producto{
            ps.setDouble(1, key);
            rs = ps.executeQuery();
            while(rs.next()){
-                softRead.setNombre(rs.getString(1));
-                softRead.setMarca(rs.getString(2));
-                softRead.setModelo(rs.getString(3));
-                softRead.setPrecio(rs.getDouble(4));
-                softRead.setCantidad(rs.getInt(5));
-                softRead.setCodigo(rs.getInt(6));
+               softRead.setNombre(rs.getString(1));
+               softRead.setMarca(rs.getString(2));
+               softRead.setModelo(rs.getString(3));
                lista.add(softRead);
+
            }
            }catch(Exception e){
-                   System.out.println("Error: " +e);
+                   System.out.println("Error: No se pudo encontrar el producto en la tabla" );
            }
            return lista;
        }
-    //Método de eliminación por código 
-    @Override
+    
+      @Override
     public int Delete(int key) {
          int delete=0;
          String SQL_DELETE = "DELETE FROM productosoftware WHERE codigo = ?";
@@ -214,7 +121,7 @@ public class Software extends Producto{
            delete=ps.executeUpdate();
            System.out.println("Producto de Software Eliminado con Exito!");
         } catch (Exception e){
-            System.out.println("Error: "+e);
+            System.out.println("Error: No se pudo eliminar el producto");
         }
         return delete;
     }
